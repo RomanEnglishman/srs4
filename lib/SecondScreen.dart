@@ -1,18 +1,21 @@
 import 'package:flutter/material.dart';
 
-class NewScreen extends StatelessWidget {
-  final String title;
-
-  NewScreen(this.title);
-
+class SecondScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(title),
-      ),
+      appBar: AppBar(title: Text('Second Screen')),
       body: Center(
-        child: Text(title, style: TextStyle(fontSize: 24)),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text('Welcome to the second screen!'),
+            ElevatedButton(
+              onPressed: () => Navigator.pop(context),
+              child: Text('Pop'),
+            ),
+          ],
+        ),
       ),
     );
   }
