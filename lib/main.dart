@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'SecondScreen.dart'; // Убедитесь, что вы создали SecondScreen.dart
+import 'SecondScreen.dart'; // Импортируйте SecondScreen.dart
 
 void main() {
   runApp(MyApp());
@@ -24,34 +24,18 @@ class HomePage extends StatelessWidget {
         title: Text('Главный экран'),
       ),
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            ElevatedButton(
-              onPressed: () => navigateToSecondScreen(context, Colors.red),
-              child: Text('Красная'),
-              style: ElevatedButton.styleFrom(primary: Colors.red),
-            ),
-            ElevatedButton(
-              onPressed: () => navigateToSecondScreen(context, Colors.yellow),
-              child: Text('Желтая'),
-              style: ElevatedButton.styleFrom(primary: Colors.yellow),
-            ),
-            ElevatedButton(
-              onPressed: () => navigateToSecondScreen(context, Colors.blue),
-              child: Text('Синяя'),
-              style: ElevatedButton.styleFrom(primary: Colors.blue),
-            ),
-          ],
+        child: ElevatedButton(
+          onPressed: () async {
+            final result = await Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => SecondScreen(data: 'Данные с главного экрана')),
+            );
+            // Используйте полученные данные
+            print("Результат: $result");
+          },
+          child: Text('Перейти к следующему экрану'),
         ),
       ),
-    );
-  }
-
-  void navigateToSecondScreen(BuildContext context, Color color) {
-    Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => SecondScreen(color: color)),
     );
   }
 }
