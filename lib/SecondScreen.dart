@@ -1,21 +1,18 @@
 import 'package:flutter/material.dart';
 
-class SecondScreen extends StatelessWidget {
-  final Color color;
+class NewScreen extends StatelessWidget {
+  final String title;
 
-  const SecondScreen({Key? key, required this.color}) : super(key: key);
+  NewScreen(this.title);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Второй экран'),
+        title: Text(title),
       ),
-      body: Container(
-        color: color,
-        child: Center(
-          child: Text('Цвет фона изменен', style: TextStyle(fontSize: 24, color: Colors.white)),
-        ),
+      body: Center(
+        child: Text(title, style: TextStyle(fontSize: 24)),
       ),
     );
   }

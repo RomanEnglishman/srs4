@@ -1,22 +1,19 @@
 import 'package:flutter/material.dart';
-import 'SecondScreen.dart'; // Убедитесь, что вы создали SecondScreen.dart
-
+import 'SecondScreen.dart';
 void main() {
   runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: HomePage(),
+      home: MainScreen(),
     );
   }
 }
 
-class HomePage extends StatelessWidget {
+class MainScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -26,32 +23,45 @@ class HomePage extends StatelessWidget {
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
+          children: [
             ElevatedButton(
-              onPressed: () => navigateToSecondScreen(context, Colors.red),
-              child: Text('Красная'),
-              style: ElevatedButton.styleFrom(primary: Colors.red),
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => NewScreen('Push')),
+                );
+              },
+              child: Text('Push'),
             ),
             ElevatedButton(
-              onPressed: () => navigateToSecondScreen(context, Colors.yellow),
-              child: Text('Желтая'),
-              style: ElevatedButton.styleFrom(primary: Colors.yellow),
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              child: Text('Pop'),
             ),
             ElevatedButton(
-              onPressed: () => navigateToSecondScreen(context, Colors.blue),
-              child: Text('Синяя'),
-              style: ElevatedButton.styleFrom(primary: Colors.blue),
+              onPressed: () {
+                Navigator.pushAndRemoveUntil(
+                  context,
+                  MaterialPageRoute(builder: (context) => NewScreen('Push and Remove Until')),
+                  (Route<dynamic> route) => false,
+                );
+              },
+              child: Text('Push and Remove Until'),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(builder: (context) => NewScreen('Push Replacement')),
+                );
+              },
+              child: Text('Push Replacement'),
             ),
           ],
         ),
       ),
     );
   }
-
-  void navigateToSecondScreen(BuildContext context, Color color) {
-    Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => SecondScreen(color: color)),
-    );
-  }
 }
+
