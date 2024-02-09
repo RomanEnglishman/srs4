@@ -1,16 +1,15 @@
 import 'package:flutter/material.dart';
-import 'SecondScreen.dart'; // Убедитесь, что вы создали SecondScreen.dart
+import 'RedPage.dart';
+import 'YellowPage.dart';
+import 'package:srs_4/BluePage.dart';
 
-void main() {
-  runApp(MyApp());
-}
+void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      title: 'Color Navigation Demo',
       home: HomePage(),
     );
   }
@@ -20,38 +19,38 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Главный экран'),
-      ),
+      appBar: AppBar(title: Text('Home Page')),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             ElevatedButton(
-              onPressed: () => navigateToSecondScreen(context, Colors.red),
-              child: Text('Красная'),
-              style: ElevatedButton.styleFrom(primary: Colors.red),
+              style: ButtonStyle(backgroundColor: MaterialStateProperty.all(Colors.red)),
+              onPressed: () => Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => RedPage()),
+              ),
+              child: Text('Red Page'),
             ),
             ElevatedButton(
-              onPressed: () => navigateToSecondScreen(context, Colors.yellow),
-              child: Text('Желтая'),
-              style: ElevatedButton.styleFrom(primary: Colors.yellow),
+              style: ButtonStyle(backgroundColor: MaterialStateProperty.all(Colors.yellow)),
+              onPressed: () => Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => YellowPage()),
+              ),
+              child: Text('Yellow Page'),
             ),
             ElevatedButton(
-              onPressed: () => navigateToSecondScreen(context, Colors.blue),
-              child: Text('Синяя'),
-              style: ElevatedButton.styleFrom(primary: Colors.blue),
+              style: ButtonStyle(backgroundColor: MaterialStateProperty.all(Colors.blue)),
+              onPressed: () => Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => BluePage()),
+              ),
+              child: Text('Blue Page'),
             ),
           ],
         ),
       ),
-    );
-  }
-
-  void navigateToSecondScreen(BuildContext context, Color color) {
-    Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => SecondScreen(color: color)),
     );
   }
 }
